@@ -22,7 +22,11 @@ class MyApp extends StatelessWidget {
 }
 
 class StudentList extends StatelessWidget {
-  final List<Student> students = [];
+  final List<Student> students = [
+    Student(id: 201082, name: "Hazem Haddad", major: "Information technology", average: 96.3, imagePath: 'assets/Images/Hazem.png'),
+    Student(id: 232324, name: "Ali Ahmed", major: "CS", average: 85.1, imagePath: 'assets/Images/Ali.png') ,
+    Student(id: 332345, name: "Sam Eyas", major: "IOT", average: 77.0, imagePath: 'assets/Images/Sam.jpg')
+  ];
 
   StudentList({super.key});
 
@@ -56,7 +60,7 @@ class Student {
 class StudentItem extends StatelessWidget {
   final Student student;
 
-  const StudentItem({super.key, required this.student});
+  const StudentItem({Key? key, required this.student}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +71,13 @@ class StudentItem extends StatelessWidget {
         backgroundImage: AssetImage(student.imagePath),
       ),
       title: Text(student.name),
-      subtitle: Text(student.major),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("ID: ${student.id}"),
+          Text(student.major),
+        ],
+      ),
       trailing: RatingBarIndicator(
         rating: rating,
         itemBuilder: (context, _) => const Icon(
